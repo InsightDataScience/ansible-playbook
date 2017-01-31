@@ -13,13 +13,13 @@
   when: zoo.stat.exists == False
 
 - name: Unpack Zookeeper tar
-  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR_FILE }} -C {{ INSTALLATION_DIR }}
+  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR }} -C {{ INSTALLATION_DIR }}
   tags: install
   when: zoo.stat.exists == False
 
 - name: Remove Zookeeper tar
   file:
-    path: "{{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR_FILE }}"
+    path: "{{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR }}"
     owner: ubuntu
     state: absent
   when: zoo.stat.exists == False
