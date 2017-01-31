@@ -1,17 +1,33 @@
+- name: Check zookeeper is installed
+  stat:
+    path: "{{ ZOOKEEPER_HOME }}"
+  register: zoo
+  tags: ['start', 'stop', 'install', 'uninstall', 'info']
+
 - name: Download Zookeeper Tar
   get_url:
     url: "{{ ZOOKEEPER_URL }}"
     dest: "{{ INSTALLATION_DIR }}"
     mode: 0644
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
 - name: Unpack Zookeeper tar
   shell: tar zxvf {{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR_FILE }} -C {{ INSTALLATION_DIR }}
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
+
+- name: Remove Zookeeper tar
+  file:
+    path: "{{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR_FILE }}"
+    owner: ubuntu
+    state: absent
+  when: zoo.stat.exists == False
 
 - name: Move zookeeper-{{ ZOOKEEPER_VERSION }} to zookeeper
   shell: mv {{ INSTALLATION_DIR }}/zookeeper-{{ ZOOKEEPER_VERSION }} {{ INSTALLATION_DIR }}/zookeeper
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
 - name: Create data directory
   file:
@@ -19,7 +35,8 @@
     state: directory
     owner: ubuntu
     mode: 0644
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
 - name: Create Zookeeper log directory
   file:
@@ -27,43 +44,71 @@
     state: directory
     owner: ubuntu
     mode: 0644
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
 - name: Configure zoo.cfg
   template:
     src: zoo_sample.cfg.j2
     dest: "{{ INSTALLATION_DIR }}/zookeeper/conf/zoo.cfg"
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
 - name: Configure log4j.properties
   template:
     src: log4j.properties.j2
     dest: "{{ INSTALLATION_DIR }}/zookeeper/conf/log4j.properties"
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
 - name: Configure myid
   template:
     src: myid.j2
     dest: "{{ ZOOKEEPER_DATA_DIR }}/myid"
-  tags: deploy
+  tags: install
+  when: zoo.stat.exists == False
 
-#- name: Set ZOOKEEPER_HOME env var
-#  environment:
-#    ZOOKEEPER_HOME: "{{ ZOOKEEPER_HOME }}"
-#  tags: deploy
-
-- name: Check zookeeper is installed
-  stat: 
-    path: "{{ ZOOKEEPER_HOME }}"
-  register: zoo
-  tags: ['start', 'stop']
+- name: Check if zookeeper service is running
+  shell: ps aux | grep zookeeper | grep -v grep
+  ignore_errors: yes
+  register: zoo_service_status
+  tags: ['stop', 'start', 'uninstall', 'info']
 
 - name: Start zookeeper service
   shell: "{{ ZOOKEEPER_START_COMMAND }}"
-  when: zoo.stat.exists
+  when: zoo.stat.exists and zoo_service_status.rc != 0
   tags: start
 
 - name: Stop zookeeper service
   shell: "{{ ZOOKEEPER_STOP_COMMAND }}"
+  when: zoo.stat.exists and zoo_service_status.rc == 0
+  tags: ['stop', 'uninstall']
+
+- name: Uninstall zookeeper
+  file:
+    path: "{{ ZOOKEEPER_HOME }}"
+    state: absent
+    owner: ubuntu
+  tags: uninstall
   when: zoo.stat.exists
-  tags: stop
+
+- name: Check server mode - leader or follower
+  shell: echo srvr | nc localhost 2181 | grep Mode
+  ignore_errors: yes
+  register: server_mode
+  tags: info
+
+- name: Zookeeper exists status report
+  debug:
+    msg: Zookeeper is {% if zoo.stat.exists == False %}not {% endif %}installed
+  tags: info
+
+- name: Zookeeper sevice (running or stopped) report
+  debug:
+    msg: Zookeeper server is {% if zoo_service_status.rc != 0 %}not {% endif %}running
+  tags: info
+
+- name: Zookeeper server_mode report
+  debug:
+    msg: "{{ server_mode.stdout }}"
+  tags: info

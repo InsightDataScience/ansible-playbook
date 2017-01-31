@@ -8,5 +8,5 @@ ZOOKEEPER_LOG_DIR: /var/log/zookeeper
 ZOOKEEPER_HOME: "{{ INSTALLATION_DIR }}/zookeeper"
 
 # Zookeeper service commands
-ZOOKEEPER_START_COMMAND: "/usr/local//zookeeper/bin/zkServer.sh start"
-ZOOKEEPER_STOP_COMMAND: "/usr/local/zookeeper/bin/zkServer.sh stop"
+ZOOKEEPER_START_COMMAND: "{{ ZOOKEEPER_HOME }}/bin/zkServer.sh start"
+ZOOKEEPER_STOP_COMMAND: "{{ ZOOKEEPER_HOME }}/bin/zkServer.sh stop"
