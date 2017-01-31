@@ -1,0 +1,8 @@
+[zookeeper]
+aws1 ansible_host=35.163.147.71
+aws2 ansible_host=35.161.137.218
+aws3 ansible_host=35.165.231.231
+
+[all:vars]
+ansible_ssh_private_key_file=/Users/ronak/.ssh/ronak-nathani.pem
+ansible_user=ubuntu

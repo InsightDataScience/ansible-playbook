@@ -1,0 +1,15 @@
+---
+
+- hosts: zoo_hosts
+  gather_facts: True
+
+- hosts: kafka_hosts
+  gather_facts: True
+
+#- hosts: zoo_hosts
+#  roles:
+#    - apache-zookeeper-role
+
+- hosts: kafka_hosts
+  roles:
+    - kafka-confluent-role

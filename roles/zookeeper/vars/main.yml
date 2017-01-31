@@ -1,0 +1,12 @@
+ZOOKEEPER_VERSION: 3.4.9
+ZOOKEEPER_URL: http://www.us.apache.org/dist/zookeeper/zookeeper-{{ ZOOKEEPER_VERSION }}/zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz
+ZOOKEEPER_TAR: zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz
+INSTALLATION_DIR: /usr/local
+ZOOKEEPER_DATA_DIR: /var/lib/zookeeper
+ZOOKEEPER_TAR_FILE: zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz
+ZOOKEEPER_LOG_DIR: /var/log/zookeeper
+ZOOKEEPER_HOME: "{{ INSTALLATION_DIR }}/zookeeper"
+
+# Zookeeper service commands
+ZOOKEEPER_START_COMMAND: "/usr/local//zookeeper/bin/zkServer.sh start"
+ZOOKEEPER_STOP_COMMAND: "/usr/local/zookeeper/bin/zkServer.sh stop"

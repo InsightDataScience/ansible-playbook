@@ -1,0 +1,1 @@
+ansible-playbook -i inventory/aws.inv plays/kafka.yml

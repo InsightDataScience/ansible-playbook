@@ -1,0 +1,1 @@
+docker run -it --name ansible-container -v ~/.ssh:/root/.ssh ubuntu

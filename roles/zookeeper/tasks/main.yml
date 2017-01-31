@@ -1,0 +1,69 @@
+- name: Download Zookeeper Tar
+  get_url:
+    url: "{{ ZOOKEEPER_URL }}"
+    dest: "{{ INSTALLATION_DIR }}"
+    mode: 0644
+  tags: deploy
+
+- name: Unpack Zookeeper tar
+  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR_FILE }} -C {{ INSTALLATION_DIR }}
+  tags: deploy
+
+- name: Move zookeeper-{{ ZOOKEEPER_VERSION }} to zookeeper
+  shell: mv {{ INSTALLATION_DIR }}/zookeeper-{{ ZOOKEEPER_VERSION }} {{ INSTALLATION_DIR }}/zookeeper
+  tags: deploy
+
+- name: Create data directory
+  file:
+    path: "{{ ZOOKEEPER_DATA_DIR }}"
+    state: directory
+    owner: ubuntu
+    mode: 0644
+  tags: deploy
+
+- name: Create Zookeeper log directory
+  file:
+    path: "{{ ZOOKEEPER_LOG_DIR }}"
+    state: directory
+    owner: ubuntu
+    mode: 0644
+  tags: deploy
+
+- name: Configure zoo.cfg
+  template:
+    src: zoo_sample.cfg.j2
+    dest: "{{ INSTALLATION_DIR }}/zookeeper/conf/zoo.cfg"
+  tags: deploy
+
+- name: Configure log4j.properties
+  template:
+    src: log4j.properties.j2
+    dest: "{{ INSTALLATION_DIR }}/zookeeper/conf/log4j.properties"
+  tags: deploy
+
+- name: Configure myid
+  template:
+    src: myid.j2
+    dest: "{{ ZOOKEEPER_DATA_DIR }}/myid"
+  tags: deploy
+
+#- name: Set ZOOKEEPER_HOME env var
+#  environment:
+#    ZOOKEEPER_HOME: "{{ ZOOKEEPER_HOME }}"
+#  tags: deploy
+
+- name: Check zookeeper is installed
+  stat: 
+    path: "{{ ZOOKEEPER_HOME }}"
+  register: zoo
+  tags: ['start', 'stop']
+
+- name: Start zookeeper service
+  shell: "{{ ZOOKEEPER_START_COMMAND }}"
+  when: zoo.stat.exists
+  tags: start
+
+- name: Stop zookeeper service
+  shell: "{{ ZOOKEEPER_STOP_COMMAND }}"
+  when: zoo.stat.exists
+  tags: stop
