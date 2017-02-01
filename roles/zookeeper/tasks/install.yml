@@ -1,0 +1,31 @@
+- name: Download Zookeeper Tar
+  get_url:
+    url: "{{ ZOOKEEPER_URL }}"
+    dest: "{{ INSTALLATION_DIR }}"
+    mode: 0644
+
+- name: Unpack Zookeeper tar
+  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR }} -C {{ INSTALLATION_DIR }}
+
+- name: Remove Zookeeper tar
+  file:
+    path: "{{ INSTALLATION_DIR }}/{{ ZOOKEEPER_TAR }}"
+    owner: ubuntu
+    state: absent
+
+- name: Move zookeeper-{{ ZOOKEEPER_VERSION }} to zookeeper
+  shell: mv {{ INSTALLATION_DIR }}/zookeeper-{{ ZOOKEEPER_VERSION }} {{ INSTALLATION_DIR }}/zookeeper
+
+- name: Create data directory
+  file:
+    path: "{{ ZOOKEEPER_DATA_DIR }}"
+    state: directory
+    owner: ubuntu
+    mode: 0644
+
+- name: Create Zookeeper log directory
+  file:
+    path: "{{ ZOOKEEPER_LOG_DIR }}"
+    state: directory
+    owner: ubuntu
+    mode: 0644

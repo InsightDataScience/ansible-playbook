@@ -1,0 +1,8 @@
+- name: Check if zookeeper is running or not
+  include: service.yml stage='before stop action'
+
+- name: Stop zookeeper service
+  shell: "{{ ZOOKEEPER_STOP_COMMAND }}"
+  when: zoo_service_status.rc == 0
+  notify:
+    - zoo_service_status report
