@@ -3,7 +3,6 @@ ZOOKEEPER_URL: http://www.us.apache.org/dist/zookeeper/zookeeper-{{ ZOOKEEPER_VE
 ZOOKEEPER_TAR: zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz
 INSTALLATION_DIR: /usr/local
 ZOOKEEPER_DATA_DIR: /var/lib/zookeeper
-ZOOKEEPER_TAR_FILE: zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz
 ZOOKEEPER_LOG_DIR: /var/log/zookeeper
 ZOOKEEPER_HOME: "{{ INSTALLATION_DIR }}/zookeeper"
 

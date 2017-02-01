@@ -1,0 +1,17 @@
+- name: Delete zookeeper
+  file:
+    path: "{{ ZOOKEEPER_HOME }}"
+    state: absent
+    owner: ubuntu
+
+- name: Delete zookeeper data dir
+  file:
+    path: "{{ ZOOKEEPER_DATA_DIR }}"
+    state: absent
+    owner: ubuntu
+
+- name: Delete zookeeper log dir
+  file:
+    path: "{{ ZOOKEEPER_HOME }}"
+    state: absent
+    owner: ubuntu
