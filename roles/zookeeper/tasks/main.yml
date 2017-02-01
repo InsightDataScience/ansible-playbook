@@ -20,10 +20,6 @@
   when: zoo.stat.exists == False
   tags: ['start', 'stop', 'uninstall', 'info']
 
-#- name: Call service task
-#  include: service.yml stage='before start/stop action'
-#  tags: ['stop', 'uninstall']
-
 - name: Start zookeeper
   include: start.yml
   tags: start
