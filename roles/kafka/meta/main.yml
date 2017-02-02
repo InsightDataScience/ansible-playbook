@@ -1,2 +1,2 @@
-dependencies:
-  - { role: zookeeper }
+#dependencies:
+#  - { role: zookeeper }

@@ -1,7 +1,7 @@
 [zookeeper]
-aws1 ansible_host=35.163.147.71
-aws2 ansible_host=35.161.137.218
-aws3 ansible_host=35.165.231.231
+aws1 ansible_host=35.166.189.83
+aws2 ansible_host=35.164.240.188
+aws3 ansible_host=52.32.35.113
 
 [kafka]
 aws1
