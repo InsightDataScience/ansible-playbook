@@ -1,0 +1,7 @@
+- name: Kafka exists status report
+  debug:
+    msg: Kafka is {% if kafka.stat.exists == False %}not {% endif %}installed
+
+- name: Call service task
+  include: service.yml stage='info'
+  when: kafka.stat.exists

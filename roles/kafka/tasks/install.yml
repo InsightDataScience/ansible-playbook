@@ -1,0 +1,28 @@
+- name: debug
+  debug:
+    msg: "{{ KAFKA_URL }}"
+
+- name: Download Kafka Tar
+  get_url:
+    url: "{{ KAFKA_URL }}"
+    dest: "{{ INSTALLATION_DIR }}"
+    mode: 0644
+
+- name: Unpack Kafka tar
+  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ KAFKA_TAR }} -C {{ INSTALLATION_DIR }}
+
+- name: Remove Kafka tar
+  file:
+    path: "{{ INSTALLATION_DIR }}/{{ KAFKA_TAR }}"
+    owner: ubuntu
+    state: absent
+
+- name: Move {{ KAFKA_SOURCE_FOLDER }} to kafka
+  shell: mv {{ INSTALLATION_DIR }}/{{ KAFKA_SOURCE_FOLDER }} {{ INSTALLATION_DIR }}/kafka
+
+- name: Create Kafka log directory
+  file:
+    path: "{{ KAFKA_LOG_DIR }}"
+    state: directory
+    owner: ubuntu
+    mode: 0644

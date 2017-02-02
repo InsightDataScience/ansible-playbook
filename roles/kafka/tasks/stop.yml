@@ -1,0 +1,9 @@
+- name: Check if kafka is running or not
+  include: service.yml stage='before stop action'
+
+- name: Stop kafka service
+  shell: "{{ KAFKA_STOP_COMMAND }}"
+  ignore_errors: yes
+  when: kafka_service_status.rc == 0
+  notify:
+    - kafka_service_status report

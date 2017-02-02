@@ -1,5 +1,0 @@
-- hosts: zookeeper
-  gather_facts: true
-  tasks:
-    - debug:
-        msg: "{% for host in groups['zookeeper'] %}{% if hostvars[host]['ansible_nodename'] == ansible_hostname %} {{ loop.index }} {% endif %}{% endfor %} this one is {{ ansible_hostname }}"
