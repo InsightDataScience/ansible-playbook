@@ -3,15 +3,6 @@
   ignore_errors: yes
   register: kafka_service_status
 
-#- name: Wait for Kafka Service
-#  wait_for:
-#    timeout: 10
-#  when: stage == 'after start/stop action'
-
-#- name: kafka_service_status
-#  debug:
-#    msg: "{{ kafka_service_status }}"
-
 - name: Kafka sevice (running or stopped) report
   debug:
     msg: "{{ stage }} | Kafka server is {% if kafka_service_status.rc != 0 %}not {% endif %}running"
