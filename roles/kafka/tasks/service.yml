@@ -1,0 +1,8 @@
+- name: Check if kafka service is running
+  shell: ps aux | grep kafka | grep -v grep
+  ignore_errors: yes
+  register: kafka_service_status
+
+- name: Kafka sevice (running or stopped) report
+  debug:
+    msg: "{{ stage }} | Kafka server is {% if kafka_service_status.rc != 0 %}not {% endif %}running"

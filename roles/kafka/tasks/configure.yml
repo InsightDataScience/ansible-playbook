@@ -1,0 +1,9 @@
+- name: Configure server.properties
+  template:
+    src: server.properties.j2
+    dest: "{{ KAFKA_HOME }}/config/server.properties"
+
+- name: Configure kafka-server-start.sh
+  template:
+    src: kafka-server-start.sh.j2
+    dest: "{{ KAFKA_HOME }}/bin/kafka-server-start.sh"

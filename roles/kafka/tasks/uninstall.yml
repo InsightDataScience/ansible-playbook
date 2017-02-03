@@ -1,0 +1,11 @@
+- name: Delete kafka
+  file:
+    path: "{{ KAFKA_HOME }}"
+    state: absent
+    owner: ubuntu
+
+- name: Delete kafka log dir
+  file:
+    path: "{{ KAFKA_HOME }}"
+    state: absent
+    owner: ubuntu

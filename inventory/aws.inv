@@ -3,6 +3,11 @@ aws1 ansible_host=35.166.162.251
 aws2 ansible_host=35.164.128.212
 aws3 ansible_host=52.34.46.246
 
+[kafka]
+aws1
+aws2
+aws3
+
 [all:vars]
 ansible_ssh_private_key_file=/Users/ronak/.ssh/ronak-nathani.pem
 ansible_user=ubuntu
