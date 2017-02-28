@@ -1,0 +1,9 @@
+- name: notify systemd of config changes
+  service: name=kafka state=reloaded enabled=yes
+  when: systemd_config.changed == True
+
+  # not sure if the above will reload the newly made service file or not
+  # as a last option (test and see), you can use this one:
+- name: notify systemd of config changes
+  command: systemctl daemon-reload
+  when: systemd_config.changed == True

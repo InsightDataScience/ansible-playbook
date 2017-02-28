@@ -1,4 +1,3 @@
----
 - name: kafka_service_status report
   include: service.yml stage='after start/stop action'
 #

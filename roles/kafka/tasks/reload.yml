@@ -1,0 +1,5 @@
+---
+- name: Reload Kafka
+	service:
+    name: kafka
+    state: reloaded

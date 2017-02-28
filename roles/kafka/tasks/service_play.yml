@@ -1,0 +1,13 @@
+- name: create kafka systemd service
+  template: src=kafka.service.j2 dest={{kafka_systemd_service}} mode=644
+    register: systemd_config
+
+
+# - name: start kafka
+#   service: name=kafka state=started enabled=yes
+
+# - name: restart kafka
+#   service: name=kafka state=restarted enabled=yes
+
+# - name: reload kafka service
+#   service: name=kafka state=reloaded enabled=yes

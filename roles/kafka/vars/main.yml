@@ -1,5 +1,5 @@
 KAFKA_VERSION: 0.10.1.1
-KAFKA_SCALA_VERSION: "2.10"
+KAFKA_SCALA_VERSION: "2.11"
 KAFKA_URL: "http://www.us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/kafka_{{ KAFKA_SCALA_VERSION }}-{{ KAFKA_VERSION }}.tgz"
 KAFKA_TAR: kafka_{{ KAFKA_SCALA_VERSION }}-{{ KAFKA_VERSION }}.tgz
 KAFKA_SOURCE_FOLDER: kafka_{{ KAFKA_SCALA_VERSION }}-{{ KAFKA_VERSION }}
@@ -8,5 +8,12 @@ KAFKA_HOME: "{{ INSTALLATION_DIR }}/kafka"
 KAFKA_LOG_DIR: /var/log/kafka
 
 # Kafka service commands
-KAFKA_STOP_COMMAND: "{{ KAFKA_HOME}}/bin/kafka-server-stop.sh"
+KAFKA_STOP_COMMAND: "{{ KAFKA_HOME}}/bin/kafka-server-stop.sh; sleep 20"
 KAFKA_START_COMMAND: "{{ KAFKA_HOME }}/bin/kafka-server-start.sh -daemon {{ KAFKA_HOME }}/config/server.properties"
+
+# Unix user and group
+UNIX_KAFKA_USER: ubuntu
+UNIX_KAFKA_GROUP: ubuntu
+
+JMX_ENABLED: true
+JMX_PORT: 9999
