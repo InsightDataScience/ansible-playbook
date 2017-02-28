@@ -6,3 +6,13 @@
 - name: Zookeeper sevice (running or stopped) report
   debug:
     msg: "{{ stage }} | Zookeeper server is {% if zoo_service_status.rc != 0 %}not {% endif %}running"
+
+- name: Check server mode - leader or follower
+  shell: echo srvr | nc localhost 2181 | grep Mode
+  ignore_errors: yes
+  register: server_mode
+
+- name: Zookeeper server_mode report
+  debug:
+    msg: "{{ server_mode.stdout }}"
+  when: zoo_service_status.rc == 0

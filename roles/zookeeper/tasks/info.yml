@@ -1,17 +1,7 @@
-- name: Call service task
-  include: service.yml stage='info'
-  when: zoo.stat.exists
-
-- name: Check server mode - leader or follower
-  shell: echo srvr | nc localhost 2181 | grep Mode
-  ignore_errors: yes
-  register: server_mode
-
 - name: Zookeeper exists status report
   debug:
     msg: Zookeeper is {% if zoo.stat.exists == False %}not {% endif %}installed
 
-- name: Zookeeper server_mode report
-  debug:
-    msg: "{{ server_mode.stdout }}"
-  when: zoo_service_status.rc == 0
+- name: Call service task
+  include: service.yml stage='info'
+  when: zoo.stat.exists
