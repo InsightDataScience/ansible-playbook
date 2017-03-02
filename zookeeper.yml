@@ -1,5 +1,15 @@
 ---
-- hosts: zookeeper
+- name: Creating host group zookeeper from dynamic inventory
+  hosts: localhost
+  connection: local
+  tags: ['install', 'start', 'stop', 'uninstall', 'info']
+  tasks:
+    - add_host: name={{ item }} groups=zookeeper
+      with_items: "{{ groups['tag_config_manager_zookeeper'] }}"
+
+- name:
+  hosts: zookeeper
+  user: ubuntu
   become: true
   become_method: sudo
   roles:
