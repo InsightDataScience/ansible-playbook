@@ -2,20 +2,21 @@
 - name: Creating host group zookeeper from dynamic inventory
   hosts: localhost
   connection: local
-  tags: ['install', 'start', 'stop', 'uninstall', 'info']
+  tags: ['info', 'install', 'start', 'stop', 'uninstall']
   tasks:
     - add_host: name={{ item }} groups=zookeeper
-      with_items: "{{ groups['tag_config_manager_zookeeper'] }}"
+      with_items: "{{ groups[zookeeper_tag] }}"
 
 - name: Creating host group kafka from dynamic inventory
   hosts: localhost
   connection: local
-  tags: ['install', 'start', 'stop', 'uninstall', 'info']
+  tags: ['info', 'install', 'start', 'stop', 'uninstall']
   tasks:
     - add_host: name={{ item }} groups=kafka
-      with_items: "{{ groups['tag_queue_kafka'] }}"
+      with_items: "{{ groups[kafka_tag] }}"
 
-- hosts: kafka
+- name: Execute Kafka roles
+  hosts: kafka
   user: ubuntu
   become: true
   become_method: sudo
