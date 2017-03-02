@@ -1,0 +1,15 @@
+---
+- name: Dissociate and release EIPs associated with instances
+  ec2_eip:
+    state: absent
+    region: "{{ region }}"
+    device_id: "{{ hostvars[item].ec2_id }}"
+    release_on_disassociation: True
+  with_items: "{{ groups[cluster] }}"
+
+- name: Terminate instances
+  ec2:
+    state: 'absent'
+    region: "{{ region }}"
+    instance_ids: "{{ hostvars[item].ec2_id }}"
+  with_items: "{{ groups[cluster] }}"

@@ -1,0 +1,8 @@
+---
+- name: Launch EC2 instances
+  include: launch.yml
+  tags: ['launch']
+
+- name: Terminate EC2 instances
+  include: terminate.yml
+  tags: ['terminate']

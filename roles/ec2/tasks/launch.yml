@@ -1,0 +1,24 @@
+---
+- name: Launch EC2 instances
+  ec2:
+    key_name: "{{ key_pair }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ ami_id }}"
+    region: "{{ region }}"
+    wait: yes
+    group_id: "{{ security_group_id }}"
+    count: "{{ num_instances }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    assign_public_ip: yes
+    instance_tags:
+      "{{ tag_key_vals }}"
+#      "{{ item.key }}: {{ item.value }}"
+#  with_dict:
+#    " {{ tag_key_vals }}"
+  register: ec2
+
+- name: associate new elastic IPs with each of the instances
+  ec2_eip:
+    device_id: "{{ item }}"
+    region: "{{ region }}"
+  with_items: "{{ ec2.instance_ids }}"
