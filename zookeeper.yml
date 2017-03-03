@@ -3,9 +3,11 @@
   hosts: localhost
   connection: local
   tags: ['info', 'install', 'start', 'stop', 'uninstall']
+  vars:
+    zookeeper_tag_name: "tag_{{ zookeeper_tag | replace('-', '_') }}"
   tasks:
     - add_host: name={{ item }} groups=zookeeper
-      with_items: "{{ groups[zookeeper_tag] }}"
+      with_items: "{{ groups[zookeeper_tag_name] }}"
 
 - name: Execute Zookeeper roles
   hosts: zookeeper
