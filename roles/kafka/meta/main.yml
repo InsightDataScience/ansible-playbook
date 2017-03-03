@@ -1,2 +1,3 @@
-#dependencies:
-#  - { role: zookeeper }
+---
+dependencies:
+  - { role: zookeeper, tags: ['zookeeper'] }
