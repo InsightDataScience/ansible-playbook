@@ -1,0 +1,7 @@
+- hosts: zookeeper
+  gather_facts: true
+  tasks:
+#    - debug:
+#        msg: broker.id={% for host in groups['kafka'] %}{% if hostvars[host]['ansible_nodename'] == ansible_hostname %}{{loop.index}}{% endif %}{% endfor %}
+    - debug:
+        msg: "zs={% for host in groups['zookeeper'] %}{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:2181{% if not loop.last %},{% endif %}{% endfor %}"

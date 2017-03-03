@@ -1,0 +1,11 @@
+---
+- name: Terminate instances
+  hosts: localhost
+  connection: local
+  gather_facts: True
+  tasks:
+    - ec2:
+        state: 'absent'
+        region: us-west-2
+        instance_ids: "{{ hostvars[item].ec2_id }}"
+      with_items: "{{ groups['tag_class_kafka'] }}"

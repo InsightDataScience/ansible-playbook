@@ -1,0 +1,22 @@
+---
+- name: testing EC2 module
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  user: ronak
+  tasks:
+    - name: Launch instances
+      ec2:
+        key_name: ronak-nathani
+        instance_type: t2.large
+        image: ami-62e01e02
+        region: us-west-2
+        wait: yes
+        group: ronak-ansible
+        count: 3
+        vpc_subnet_id: subnet-3a78835f
+        assign_public_ip: yes
+        instance_tags:
+          Name: ronak-ansible2
+          config_manager: zookeeper
+          queue: kafka
