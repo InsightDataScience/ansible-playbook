@@ -4,5 +4,7 @@
   tags: ['launch']
 
 - name: Terminate EC2 instances
+#  vars:
+#    cluster_tag: "tag_Name_{{ cluster | replace('-', '_') }}" 
   include: terminate.yml
   tags: ['terminate']

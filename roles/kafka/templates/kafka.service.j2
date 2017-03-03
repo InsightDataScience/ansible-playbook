@@ -1,0 +1,14 @@
+[Unit]
+Description=Kafka Daemon
+
+[Service]
+Type=simple
+User={{ UNIX_KAFKA_USER }}
+Group={{ UNIX_KAFKA_GROUP }}
+Restart=on-failure
+Environment="JMX_PORT={{ JMX_PORT }}"
+ExecStart={{ KAFKA_HOME }}/bin/kafka-server-start.sh {{ KAFKA_HOME }}/conf/server.properties
+ExecStop={{ KAFKA_HOME }}/bin/kafka-server-stop.sh
+
+[Install]
+WantedBy=multi-user.target

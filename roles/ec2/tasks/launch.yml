@@ -12,9 +12,6 @@
     assign_public_ip: yes
     instance_tags:
       "{{ tag_key_vals }}"
-#      "{{ item.key }}: {{ item.value }}"
-#  with_dict:
-#    " {{ tag_key_vals }}"
   register: ec2
 
 - name: associate new elastic IPs with each of the instances

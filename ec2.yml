@@ -3,21 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: False
-  vars:
-    key_pair: ronak-nathani
-    instance_type: t2.medium
-    region: us-west-2
-    security_group_id: sg-19127861
-    num_instances: 2
-    subnet_id: subnet-3a78835f
-    tag_key_vals:
-      Name: ronak-ec2-role
-      class: kafka
-      class2: zookeeper
-#  tasks:
-#    - debug:
-#        msg: "{{ item.key }}: {{ item.value }}"
-#      with_dict:
-#        "{{ tag_key_vals }}"
+  vars_files:
+    - "{{ vars_file }}"
   roles:
     - role: ec2

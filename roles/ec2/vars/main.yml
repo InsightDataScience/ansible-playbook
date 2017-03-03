@@ -1,3 +1,3 @@
 ---
 ami_id: ami-62e01e02
-
+cluster_tag: "tag_Name_{{ cluster | replace('-', '_') }}"
