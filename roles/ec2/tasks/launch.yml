@@ -10,6 +10,7 @@
     count: "{{ num_instances }}"
     vpc_subnet_id: "{{ subnet_id }}"
     assign_public_ip: yes
+    state: running
     instance_tags:
       "{{ tag_key_vals }}"
   register: ec2
