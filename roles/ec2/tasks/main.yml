@@ -9,6 +9,10 @@
   include: launch.yml
   tags: ['launch']
 
+- name: Start stopped EC2 instances
+  include: start.yml
+  tags: ['start']
+
 - name: Stop EC2 instances
   include: stop.yml
   tags: ['stop']
