@@ -1,0 +1,26 @@
+---
+- name: Fail play if the cluster tag Name is not defined
+  fail:
+    msg: "Specify 'Name' for the cluster in tag_key_vals variable"
+  when: tag_key_vals.Name is undefined
+  tags: ['launch', 'zookeeper']
+
+- name: Launch EC2 instances
+  include: launch.yml
+  tags: ['launch']
+
+- name: Start stopped EC2 instances
+  include: start.yml
+  tags: ['start']
+
+- name: Stop EC2 instances
+  include: stop.yml
+  tags: ['stop']
+
+- name: Terminate EC2 instances
+  include: terminate.yml
+  tags: ['terminate']
+
+- name: Describe EC2 instances info
+  include: describe.yml
+  tags: ['describe']

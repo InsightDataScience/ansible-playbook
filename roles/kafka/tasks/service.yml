@@ -1,3 +1,4 @@
+---
 - name: Check if kafka service is running
   shell: ps aux | grep kafka | grep -v grep
   ignore_errors: yes

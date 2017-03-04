@@ -1,5 +1,27 @@
 ---
-- hosts: kafka
+- name: Creating host group zookeeper from dynamic inventory
+  hosts: localhost
+  connection: local
+  tags: ['info', 'install', 'start', 'stop', 'uninstall']
+  vars:
+    zookeeper_tag_name: "tag_{{ zookeeper_tag | replace('-', '_') }}"
+  tasks:
+    - add_host: name={{ item }} groups=zookeeper
+      with_items: "{{ groups[zookeeper_tag_name] }}"
+
+- name: Creating host group kafka from dynamic inventory
+  hosts: localhost
+  connection: local
+  tags: ['info', 'install', 'start', 'stop', 'uninstall']
+  vars:
+    kafka_tag_name: "tag_{{ kafka_tag | replace('-', '_') }}"
+  tasks:
+    - add_host: name={{ item }} groups=kafka
+      with_items: "{{ groups[kafka_tag_name] }}"
+
+- name: Execute Kafka roles
+  hosts: kafka
+  user: ubuntu
   become: true
   become_method: sudo
   roles:

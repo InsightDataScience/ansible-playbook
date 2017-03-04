@@ -1,0 +1,15 @@
+- name: Configure server.properties
+  template:
+    src: server.properties.j2
+    dest: "{{ KAFKA_HOME }}/config/server.properties"
+
+- name: Configure kafka-server-start.sh
+  template:
+    src: kafka-server-start.sh.j2
+    dest: "{{ KAFKA_HOME }}/bin/kafka-server-start.sh"
+
+#- name: Configure kafka.service.j2
+#  template: 
+#    src: kafka.service.j2
+#    dest: /etc/systemd/kafka.service
+#    mode: 644

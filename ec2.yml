@@ -1,0 +1,9 @@
+---
+- name: Execute EC2 roles
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - "{{ vars_file }}"
+  roles:
+    - role: ec2

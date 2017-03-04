@@ -1,7 +1,7 @@
+---
 - name: zoo_service_status report
   include: service.yml stage='after start/stop action'
 
-#- name: zoo_start_status report
-#  include: service.yml stage='after start action'
-
-
+# this seems to be a bug in ansible 2.2.1 - handlers after the first one are not recognized
+# - name: zoo_start_status report
+#   include: service.yml stage='after start action'

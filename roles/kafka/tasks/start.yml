@@ -1,9 +1,11 @@
-- name: Check if kafka is running or not
-  include: service.yml stage='before start action'
+---
+ - name: Check if kafka is running or not
+   include: service.yml stage='before start action'
 
-- name: Start kafka service
-  shell: "{{ KAFKA_START_COMMAND }}"
-  ignore_errors: yes
-  when: kafka_service_status.rc != 0
-  notify:
-    - kafka_service_status report
+ - name: Start kafka service
+   shell: "{{ KAFKA_START_COMMAND }}"
+   ignore_errors: yes
+   when: kafka_service_status.rc != 0
+   notify:
+     - kafka_service_status report
+

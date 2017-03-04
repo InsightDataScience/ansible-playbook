@@ -1,0 +1,3 @@
+---
+ami_id: ami-62e01e02
+cluster_name: "tag_Name_{{ tag_key_vals.Name | replace('-', '_') }}"
