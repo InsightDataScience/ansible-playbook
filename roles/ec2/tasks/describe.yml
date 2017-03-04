@@ -1,0 +1,31 @@
+---
+- name: EC2 Remote facts
+  ec2_remote_facts:
+    region: "{{ region }}"
+    filters:
+      "tag:Name": "{{ tag_key_vals.Name }}"
+  register: ec2_info
+
+- name: Gather EC2 info
+  set_fact:
+    instance_summary:
+      public_ip: "{{ item.public_ip_address }}"
+      instance_tags: "{{ item.tags }}"
+      pubilc_dns: "{{ item.public_dns_name }}"
+      private_ip: "{{ item.private_ip_address }}"
+      region: "{{ item.region }}"
+      state: "{{ item.state }}"
+      key_name: "{{ item.key_name }}"
+      security_group: "{{ item.groups }}"
+      launch_time: "{{ item.launch_time }}"
+      vpc: "{{ item.vpc_id }}"
+  with_items:
+    "{{ ec2_info.instances }}"
+  register:
+    ec2_set_facts
+
+- set_fact: summary="{{ ec2_set_facts.results | map(attribute='ansible_facts.instance_summary') | list }}"
+
+- name: "{{ tag_key_vals.Name }} cluster information"
+  debug:
+    msg: "{{ summary  }}"

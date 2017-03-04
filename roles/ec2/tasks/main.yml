@@ -20,3 +20,7 @@
 - name: Terminate EC2 instances
   include: terminate.yml
   tags: ['terminate']
+
+- name: Describe EC2 instances info
+  include: describe.yml
+  tags: ['describe']
