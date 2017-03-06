@@ -4,5 +4,5 @@
     state: running
     region: "{{ region }}"
     wait: True
-    instance_ids: "{{ hostvars[item].ec2_id }}"
-  with_items: "{{ groups[cluster_name] }}" 
+    instance_tags:
+      Name: "{{ tag_key_vals.Name }}"
