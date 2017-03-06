@@ -4,17 +4,23 @@
 1. [Setup ansible for your system](http://docs.ansible.com/ansible/intro_installation.html)
 2. Create following folders
  
-  ```
-  /etc/ansible/
-  /etc/ansible/hosts
-  ```
+  <pre>
+  <b>~$</b> mkdir -p /etc/ansible/hosts
+  </pre>
 3. Clone this repo
   
-  ```
-  git clone https://github.com/InsightDataScience/ansible-playbook.git
-  ```
+  <pre>
+  <b>~$</b> git clone https://github.com/InsightDataScience/ansible-playbook.git
+  </pre>
+
+  **NOTE:** To use AWS dynamic inventory
 4. Copy the `ec2.py` and `ec2.ini` files in this repo to `/etc/ansible/hosts`
-5. Update information in `ansible\_example.cfg` and move it to `/etc/ansible/ansible.cfg
+5. Update information in `ansible_example.cfg` and move it to `/etc/ansible/ansible.cfg`
+6. Export AWS credentials as environment variables
+<pre>
+export AWS_ACCESS_KEY_ID=<b>XXXXXXXXXXXXXX</b>
+export AWS_SECRET_ACCESS_KEY==<b>XXXXXXXXXXXXXX</b>
+</pre>
 
 ## Playbooks
 1. **EC2**
