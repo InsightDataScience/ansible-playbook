@@ -18,9 +18,7 @@ RUN apt-get update \
 
 RUN pip install boto
 
-#RUN git clone https://github.com/InsightDataScience/ansible-playbook.git /root/ansible-playbook
-
-#COPY . /root/ansible-playbook
+COPY . /root/ansible-playbook
 
 RUN rm /etc/ansible/hosts
 RUN mkdir /etc/ansible/hosts/
