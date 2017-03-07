@@ -1,8 +1,16 @@
 ---
+- name: Get running EC2 instances for the given tag
+  ec2_remote_facts:
+    region: "{{ region }}"
+    filters:
+      "tag:Name": "{{ tag_key_vals.Name }}"
+      instance-state-name: running
+  register: ec2_info
+
 - name: Stop EC2 instances specified by the given tag
   ec2:
     state: stopped
     region: "{{ region }}"
     wait: True
-    instance_tags:
-      Name: "{{ tag_key_vals.Name }}"
+    instance_ids: "{{ item.id }}"
+  with_items: "{{ ec2_info.instances }}"
