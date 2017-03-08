@@ -101,23 +101,23 @@ This project is a set of Ansible playbooks to easily install a set of distribute
 
   * ####Launch EC2 instances:
     
-    ```
-    ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags launch
+    ```bash
+    ~$ ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags launch
     ```
   * ####Stop EC2 instances:
   
-    ```
-    ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags stop 
+    ```bash
+    ~$ ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags stop 
     ```
   * ####Start EC2 instances:
   
-    ```
-    ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags start 
+    ```bash
+    ~$ ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags start 
     ```
   * ####Terminate EC2 instances:
   
-    ```
-    ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags terminate
+    ```bash
+    ~$ ansible-playbook ./ec2.yml --extra-vars "vars_file=./example_ec2_vars.yml" --tags terminate
     ```
 
 * ###Zookeeper
@@ -127,28 +127,28 @@ This project is a set of Ansible playbooks to easily install a set of distribute
 
   * ####Install Zookeeper:
 
-    ```
-    ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags install
+    ```bash
+    ~$ ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags install
     ```
   * ####Start Zookeeper:
 
-    ```
-    ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags start
+    ```bash
+    ~$ ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags start
     ```
   * ####Get info about Zookeeper on the specified cluster:
 
-    ```
-    ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags info
+    ```bash
+    ~$ ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags info
     ```
   * ####Stop Zookeeper:
 
-    ```
-    ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags stop 
+    ```bash
+    ~$ ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags stop 
     ```
   * ####Uninstall Zookeeper:
 
-    ```
-    ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags uninstall
+    ```bash
+    ~$ ansible-playbook ./zookeeper.yml --extra-vars "zookeeper_tag=<cluster_tag>" --tags uninstall
     ```
 
 * ###Kafka
@@ -163,27 +163,27 @@ This project is a set of Ansible playbooks to easily install a set of distribute
 
   * ####Install Kafka:
 
-    ```
-    ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags install
+    ```bash
+    ~$ ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags install
     ```
   * ####Start Kafka:
 
-    ```
-    ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags start
+    ```bash
+    ~$ ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags start
     ```
   * ####Get info about Kafka on the specified cluster:
 
-    ```
-    ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags info
+    ```bash
+    ~$ ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags info
     ```
   * ####Stop Kafka:
 
-    ```
-    ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags stop --skip-tags zookeeper
+    ```bash
+    ~$ ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags stop --skip-tags zookeeper
     ```
   * ####Uninstall Kafka:
 
-    ```
-    ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags uninstall --skip-tags zookeeper
+    ```bash
+    ~$ ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags uninstall --skip-tags zookeeper
 
     ```
