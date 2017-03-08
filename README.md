@@ -1,6 +1,17 @@
 ## Ansible playbook to deploy distributed technologies
 This project is a set of Ansible playbooks to easily install a set of distributed technologies on [AWS](https://aws.amazon.com/)
 
+## Table of Contents
+1. [Supported playbooks](#supported-playbooks)
+2. [Supported commands](#supported-commands)
+3. [Setup](#setup)
+  * [On your local/remote machine](#on-your-localremote-machine)
+  * [Using Docker container](#using-docker-container)
+4. [Playbooks](#playbooks)
+  * [Launch/Terminate EC2 instances on AWS](#ec2)
+  * [Zookeeper](#zookeeper)
+  * [Kafka](#kafka)
+
 ## Supported playbooks
 * EC2
 * Zookeeper
@@ -12,16 +23,6 @@ This project is a set of Ansible playbooks to easily install a set of distribute
 ```
 * **EC2** playbook is controlled by a yaml file containing variables for the EC2 instances to be acted on. More details [below](#ec2)
 * **Zookeeper** and **Kafka** playbooks need respective cluster tags to be specified to identify which nodes are in the cluster and need to be acted on. More details [below](#zookeeper)
-
-## Table of Contents
-1. [Setup](#setup)
-  * [On your local/remote machine](#on-your-localremote-machine)
-  * [Using Docker container](#using-docker-container)
-
-2. [Playbooks](#playbooks)
-  * [Launch/Terminate EC2 instances on AWS](#ec2)
-  * [Zookeeper](#zookeeper)
-  * [Kafka](#kafka)
 
 ## Setup
 ### On your local/remote machine
