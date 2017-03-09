@@ -3,7 +3,7 @@
   fail:
     msg: "Specify 'Name' for the cluster in tag_key_vals variable"
   when: tag_key_vals.Name is undefined
-  tags: ['launch', 'zookeeper']
+  tags: ['launch']
 
 - name: Launch EC2 instances
   include: launch.yml
