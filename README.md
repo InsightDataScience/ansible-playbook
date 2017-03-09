@@ -153,7 +153,7 @@ This project is a set of Ansible playbooks to easily install a set of distribute
     ```
 
 * ###Kafka
-  Kafka has a dependency on Zookeeper for cluster membership, topic configuration, data partition, etc. For Kafka playbook, a `zookeeper_tag` and a `kafka_tag` needs to be specified to identify the nodes in the zookeeper and kafka cluster respectively. The `kafka_tag` and `zookeeper_tag` can be any tag specified in `tag_key_vals` in the variable file for [EC2](while launching EC2 instances).
+  Kafka has a dependency on Zookeeper for cluster membership, topic configuration, data partition, etc. For Kafka playbook, a `zookeeper_tag` and a `kafka_tag` needs to be specified to identify the nodes in the zookeeper and kafka cluster respectively. The `kafka_tag` and `zookeeper_tag` can be any tag specified in `tag_key_vals` in the [variable file for EC2](#variable-file).
 
   The `kafka_tag` and `zookeeper_tag` are specifed as `<key>_<value>` for one of the `tag_key_vals` to be used. For example, if the `<cluster-name>` in the [EC2 variable file](#variable-file) mentioned above was `test-cluster` and we had same cluster for Zookeeper and Kafka, the `kafka_tag` and `zookeeper_tag` would be specified as `zookeeper_tag=Name_test-cluster` and `kafka_tag=Name_test-cluster` respectively. Both Zookeeper and Kafka don't have to be on the same cluster and it doesn't have to be the `Name` tag but it could be any key value pair in `tag_key_vals` specified as `zookeeper_tag=<key>_<value>` and `kafka_tag=<key>_<value>`.
 
