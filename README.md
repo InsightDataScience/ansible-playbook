@@ -100,6 +100,12 @@ This project is a set of Ansible playbooks to easily install a set of distribute
 
     The `Name` tag in the `tag_key_vals` is mandatory to create an identifier for the instances. More tags can be added if needed but are optional.
 
+    In your terminal, you will likely also need to add your private key to an ssh agent:
+
+    ```bash
+    ssh-add </path/to/my.pem>
+    ```
+
   * ####Launch EC2 instances:
     
     ```bash
