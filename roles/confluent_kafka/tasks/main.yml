@@ -1,0 +1,38 @@
+- name: Check if kafka is installed
+  stat:
+    path: "{{ KAFKA_HOME }}"
+  register: kafka
+  tags: ['start', 'stop', 'install', 'uninstall', 'info']
+
+- name: Install Kakfa
+  include: install.yml
+  tags: install
+  when: kafka.stat.exists == False
+
+- name: Configure Kakfa
+  include: configure.yml
+  tags: install
+  when: kafka.stat.exists == False
+
+- name: Fail play if Kakfa is not installed
+  fail:
+    msg: "Kakfa is not installed"
+  when: kafka.stat.exists == False
+  tags: ['start', 'stop', 'uninstall', 'info']
+
+- name: Start kafka
+  include: start.yml
+  tags: start
+
+- name: Stop kafka
+  include: stop.yml
+  tags: ['stop', 'uninstall']
+
+- name: Uninstall kafka
+  include: uninstall.yml
+  tags: uninstall
+  when: kafka.stat.exists
+
+- name: Kakfa info
+  include: info.yml
+  tags: info

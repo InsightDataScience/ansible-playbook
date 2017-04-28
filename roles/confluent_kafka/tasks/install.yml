@@ -1,0 +1,69 @@
+- name: Download Confluent Tar
+  get_url:
+    url: "{{ CONFLUENT_URL }}"
+    dest: "{{ INSTALLATION_DIR }}"
+    mode: 0644
+
+- name: Unpack Confluent tar
+  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ CONFLUENT_TAR }} -C {{ INSTALLATION_DIR }}
+
+- name: Remove Confluent tar
+  file:
+    path: "{{ INSTALLATION_DIR }}/{{ CONFLUENT_TAR }}"
+    owner: ubuntu
+    state: absent
+
+- name: Move {{ CONFLUENT_SOURCE_FOLDER }} to confluent
+  shell: mv {{ INSTALLATION_DIR }}/{{ CONFLUENT_SOURCE_FOLDER }} {{ INSTALLATION_DIR }}/confluent
+
+- name: Download Confluent Kafka Python Client
+  get_url:
+    url: "{{ CONFLUENT_KAFKA_PYTHON_URL }}"
+    dest: "{{ CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH }}"
+    mode: 0644
+
+- name: Unpack Confluent Kafka Python Client tar
+  shell: tar zxvf {{ CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH }}/{{ CONFLUENT_KAFKA_PYTHON_TAR }}
+
+- name: Configure Confluent Kafka Python Client
+  shell: cd {{ CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH }}/{{ CONFLUENT_KAFKA_PYTHON_SOURCE_FOLDER }}; ./configure --prefix=/usr; make -j; sudo make install
+
+- name: Install Confluent Kafka Python Client
+  shell: cd {{ CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH }}; sudo pip install confluent-kafka[avro]
+
+- name: Remove Confluent Kafka Python Client tar
+  file:
+    path: "{{ CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH }}/{{ CONFLUENT_KAFKA_PYTHON_TAR }}"
+    owner: ubuntu
+    state: absent
+
+- name: Remove Confluent Kafka Python Client source folder
+  file:
+    path: "{{ CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH }}/{{ CONFLUENT_KAFKA_PYTHON_SOURCE_FOLDER }}"
+    state: absent
+    owner: ubuntu
+
+- name: Download Avro Tar
+  get_url:
+    url: "{{ AVRO_URL }}"
+    dest: "{{ AVRO_DOWNLOAD_PATH }}"
+    mode: 0644
+
+- name: Unpack Avro tar
+  shell: tar zxvf {{ AVRO_DOWNLOAD_PATH }}/{{ AVRO_TAR }}
+
+- name: Move {{ AVRO_SOURCE_FOLDER }} to Avro
+  shell: mv {{ AVRO_DOWNLOAD_PATH }}/{{ AVRO_SOURCE_FOLDER }} {{ AVRO_DOWNLOAD_PATH }}/avro
+
+- name: Install Avro
+  shell: cd {{ AVRO_DOWNLOAD_PATH }}/avro; sudo python setup.py install; cd {{ AVRO_DOWNLOAD_PATH }}
+
+- name: Remove Avro tar
+  file:
+    path: "{{ AVRO_DOWNLOAD_PATH }}/{{ AVRO_TAR }}"
+    state: absent
+
+- name: Remove Avro folder
+  file:
+    path: "{{ AVRO_DOWNLOAD_PATH }}/{{ AVRO_SOURCE_FOLDER }}"
+    state: absent

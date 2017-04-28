@@ -1,0 +1,20 @@
+# Confluent vars
+CONFLUENT_VERSION: 3.1.2
+CONFLUENT_URL: http://packages.confluent.io/archive/3.1/confluent-oss-{{ CONFLUENT_VERSION }}-2.11.tar.gz
+CONFLUENT_TAR: confluent-oss-{{ CONFLUENT_VER }}-2.11.tar.gz
+CONFLUENT_SOURCE_FOLDER: confluent-oss-{{ CONFLUENT_VER }}-2.11
+INSTALLATION_DIR: /usr/local
+CONFLUENT_HOME: "{{ INSTALLATION_DIR }}/confluent"
+
+# Confluent Kafka Python client vars
+CONFLUENT_KAFKA_PYTHON_URL: https://github.com/edenhill/librdkafka/archive/v0.9.2-RC1.tar.gz
+CONFLUENT_KAFKA_PYTHON_TAR: v0.9.2-RC1.tar.gz
+CONFLUENT_KAFKA_PYTHON_SOURCE_FOLDER: librdkafka-0.9.2-RC1
+CONFLUENT_KAFKA_PYTHON_DOWNLOAD_PATH: /home/ubuntu
+
+# Avro vars
+AVRO_VERSION: 1.8.1
+AVRO_URL: http://www-us.apache.org/dist/avro/stable/py/avro-{{ AVRO_VERSION }}.tar.gz
+AVRO_TAR: avro-{{ AVRO_VERSION }}.tar.gz
+AVRO_DOWNLOAD_PATH: /home/ubuntu
+AVRO_SOURCE_FOLDER: avro-{{ AVRO_VERSION }}
