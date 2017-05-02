@@ -1,0 +1,5 @@
+- name: Testing
+  file:
+    path: "/home/ubuntu/bort"
+    owner: ubuntu
+    state: present

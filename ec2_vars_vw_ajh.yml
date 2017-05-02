@@ -1,0 +1,10 @@
+---
+key_pair: adam-heller
+instance_type: t2.micro
+region: us-west-2
+security_group_id: sg-2b6cf950
+num_instances: 2
+subnet_id: subnet-d7db7ab0
+tag_key_vals:
+  Name: aj-ec2-test
+  class: vw

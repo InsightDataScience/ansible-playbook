@@ -1,0 +1,14 @@
+- name: Check if vw is installed
+  stat:
+    path: "{{ VW_HOME }}"
+  register: vw
+  tags: ['test', 'start', 'stop', 'install', 'uninstall', 'info']
+
+- name: Install Vowpal Wabbit
+  include: install.yml
+  tags: install
+  when: vw.stat.exists == False
+
+- name: Testing apt
+  include: test.yml
+  tags: test

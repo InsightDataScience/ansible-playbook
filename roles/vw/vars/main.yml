@@ -1,0 +1,3 @@
+BUILD_DIR: /home/ubuntu/vw-git
+INSTALL_DIR: /usr/local
+VW_HOME: /usr/local/vw
