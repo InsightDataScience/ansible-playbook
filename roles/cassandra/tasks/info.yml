@@ -1,0 +1,7 @@
+- name: Cassandra exists status report
+  debug:
+    msg: Cassandra is {% if cassandra.stat.exists == False %}not {% endif %}installed
+
+- name: Call service task
+  include: service.yml stage='info'
+  when: cassandra.stat.exists

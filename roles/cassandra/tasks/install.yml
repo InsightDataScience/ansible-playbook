@@ -1,0 +1,22 @@
+- name: Download Cassandra Tar
+  get_url:
+    url: "{{ CASSANDRA_URL }}"
+    dest: "{{ INSTALLATION_DIR }}"
+
+- name: Unpack Cassandra tar
+  shell: tar zxvf {{ INSTALLATION_DIR }}/{{ CASSANDRA_TAR }} -C {{ INSTALLATION_DIR }}
+
+- name: Remove Cassandra tar
+  file:
+    path: "{{ INSTALLATION_DIR }}/{{ CASSANDRA_TAR }}"
+    owner: ubuntu
+    state: absent
+
+- name: Move {{ CASSANDRA_SOURCE_FOLDER }} to cassandra
+  shell: mv {{ INSTALLATION_DIR }}/{{ CASSANDRA_SOURCE_FOLDER }} {{ INSTALLATION_DIR }}/cassandra
+
+- name: Create Cassandra data directory
+  file:
+    path: "{{ CASSANDRA_DATA_DIR }}"
+    state: directory
+    owner: ubuntu

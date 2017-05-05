@@ -1,0 +1,15 @@
+CASSANDRA_VERSION: "3.10"
+CASSANDRA_URL: http://www.us.apache.org/dist/cassandra/{{ CASSANDRA_VERSION }}/apache-cassandra-{{ CASSANDRA_VERSION }}-bin.tar.gz
+CASSANDRA_TAR: apache-cassandra-{{ CASSANDRA_VERSION }}-bin.tar.gz
+CASSANDRA_SOURCE_FOLDER: apache-cassandra-{{ CASSANDRA_VERSION }}
+INSTALLATION_DIR: /usr/local
+CASSANDRA_HOME: "{{ INSTALLATION_DIR }}/cassandra"
+CASSANDRA_DATA_DIR: "/usr/local/cassandra/data/data"
+
+# Cassandra service commands
+CASSANDRA_START_COMMAND: "{{ CASSANDRA_HOME }}/bin/cassandra; sleep 20"
+CASSANDRA_STOP_COMMAND: "{{ CASSANDRA_HOME }}/bin/nodetool stopdaemon"
+
+# Unix user and group
+UNIX_CASSANDRA_USER: ubuntu
+UNIX_CASSANDRA_GROUP: ubuntu

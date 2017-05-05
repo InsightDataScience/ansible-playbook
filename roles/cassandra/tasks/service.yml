@@ -1,0 +1,11 @@
+---
+- name: Check if cassandra service is running
+  become: false
+  shell: ps aux | grep cassandra | grep -v grep
+  ignore_errors: yes
+  register: cassandra_service_status
+
+- name: Cassandra sevice (running or stopped) report
+  become: false
+  debug:
+    msg: "{{ stage }} | Cassandra server is {% if cassandra_service_status.rc != 0 %}not {% endif %}running"

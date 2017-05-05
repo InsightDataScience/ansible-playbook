@@ -1,0 +1,4 @@
+- name: Configure cassandra.yaml
+  template:
+    src: cassandra.yaml.j2
+    dest: "{{ CASSANDRA_HOME }}/conf/cassandra.yaml"

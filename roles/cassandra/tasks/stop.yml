@@ -1,0 +1,11 @@
+---
+ - name: Check if cassandra is running or not
+   include: service.yml stage='before stop action'
+
+ - name: Stop cassandra service
+   shell: "{{ CASSANDRA_STOP_COMMAND }}"
+   ignore_errors: yes
+   when: cassandra_service_status.rc == 0
+   notify:
+     - cassandra_service_status report
+

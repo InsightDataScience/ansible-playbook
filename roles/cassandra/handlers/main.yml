@@ -1,0 +1,5 @@
+- name: cassandra_service_status report
+  include: service.yml stage='after start/stop action'
+#
+#- name: cassandra_stop_status report
+#  include: service.yml stage='after stop action'

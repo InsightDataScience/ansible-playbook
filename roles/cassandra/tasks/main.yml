@@ -1,0 +1,38 @@
+- name: Check if cassandra is installed
+  stat:
+    path: "{{ CASSANDRA_HOME }}"
+  register: cassandra
+  tags: ['start', 'stop', 'install', 'uninstall', 'info']
+
+- name: Install Cassandra
+  include: install.yml
+  tags: install
+  when: cassandra.stat.exists == False
+
+- name: Configure Cassandra
+  include: configure.yml
+  tags: install
+  when: cassandra.stat.exists == False
+
+- name: Fail play if Cassandra is not installed
+  fail:
+    msg: "Cassandra is not installed"
+  when: cassandra.stat.exists == False
+  tags: ['start', 'stop', 'uninstall', 'info']
+
+#- name: Start cassandra
+#  include: start.yml
+#  tags: start
+#
+#- name: Stop cassandra
+#  include: stop.yml
+#  tags: ['stop', 'uninstall']
+
+- name: Uninstall cassandra
+  include: uninstall.yml
+  tags: uninstall
+  when: cassandra.stat.exists
+
+- name: Cassandra info
+  include: info.yml
+  tags: info
