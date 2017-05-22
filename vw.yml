@@ -1,0 +1,18 @@
+---
+- name: Creating host group vowpal wabbit from dynamic inventory
+  hosts: localhost
+  connection: local
+  tags: ['info', 'install', 'start', 'stop', 'uninstall']
+  vars:
+    vw_tag_name: "tag_{{ vw_tag | replace('-', '_') }}"
+  tasks:
+    - add_host: name={{ item }} groups=vw
+      with_items: "{{ groups[vw_tag_name] }}"
+
+- name: Execute Vowpal Wabbit roles
+  hosts: vw
+  user: ubuntu
+  become: true
+  become_method: sudo
+  roles:
+    - role: vw

@@ -11,6 +11,7 @@ This project is a set of Ansible playbooks to easily install a set of distribute
   * [Launch/Terminate EC2 instances on AWS](#ec2)
   * [Zookeeper](#zookeeper)
   * [Kafka](#kafka)
+  * [Vowpal Wabbit](#vowpal-wabbit)
 
 ## Supported playbooks
 * EC2
@@ -22,7 +23,7 @@ This project is a set of Ansible playbooks to easily install a set of distribute
 ~$ ansible-playbook <master-playbook>.yml --extra-vars "<var1>=<value1> <var2>=<value2>" --tags "<tag1>,<tag2>"
 ```
 * **EC2** playbook is controlled by a yaml file containing variables for the EC2 instances to be acted on. More details [below](#ec2)
-* **Zookeeper** and **Kafka** playbooks need respective cluster tags to be specified to identify which nodes are in the cluster and need to be acted on. More details [below](#zookeeper)
+* **Zookeeper**, **Kafka**, and **Vowpal Wabbit** playbooks need respective cluster tags to be specified to identify which nodes are in the cluster and need to be acted on. More details [below](#zookeeper)
 
 ## Setup
 ### On your local/remote machine
@@ -194,3 +195,14 @@ This project is a set of Ansible playbooks to easily install a set of distribute
     ~$ ansible-playbook ./kafka.yml --extra-vars "zookeeper_tag=<cluster_tag> kafka_tag=<cluster_tag>" --tags uninstall --skip-tags zookeeper
 
     ```
+
+ *  #### Vowpal Wabbit   
+
+Vowpal Wabbit is a fast out-of-core Machine Learning system. Installation can take upwards of 10 minutes on micro instances, as it compiles a lot of C++ with high optimization levels using Clang. 
+
+  * ####Install Vowpal Wabbit:
+
+    ```bash
+    ~$ ansible-playbook ./vw.yml --extra-vars "vw_tag=class_vw" --tags install
+    ```
+

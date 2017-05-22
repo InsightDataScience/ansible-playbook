@@ -1,0 +1,38 @@
+---
+- name: Ensure vw's dependencies are installed
+  become: yes
+  apt: "name={{ item }} state=installed"
+  with_items:
+    - make
+    - libboost-program-options-dev 
+    - zlib1g-dev
+    - libboost-python-dev
+    - clang
+  register: vw_dependencies_deb
+  when: ansible_os_family == 'Debian'
+
+- name: Clone the vw repo
+  become: no
+  git:
+    repo: 'git://github.com/JohnLangford/vowpal_wabbit.git'
+    dest: "{{ BUILD_DIR }}"
+  register: vw_cloned
+  when: vw_dependencies_deb|success
+
+- name: Build vw
+  become: no
+  command: make CXX=clang++ prefix={{ INSTALL_DIR }} {{ item }}
+  args:
+    chdir: vw-git
+  with_items:
+    - 
+    - test
+  when: vw_cloned|success
+  register: vw_built
+
+- name: Install vw
+  become: yes
+  command: make CXX=clang++ prefix={{ INSTALL_DIR }} install
+  args:
+    chdir: vw-git
+  when: vw_built|success
